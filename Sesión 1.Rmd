@@ -63,7 +63,7 @@ RStudio tiene documentaci贸n muy extensa. Cada vez que no sepas c贸mo usar un co
 
 ## Crea un notebook
 
-Los notebooks son herramientas que facilitan la programaci贸n y te ayudan a que tu c贸digo se vea m谩s limpio.
+Los notebooks son herramientas que facilitan la programaci贸n y te ayudan a que tu c贸digo se vea m谩s limpio. Para crear un "chunk" (donde puedes correr c骴igo), presiona **ctrl + alt + I**.
 
 ## Parte 1 - Fundamentos de R
 
