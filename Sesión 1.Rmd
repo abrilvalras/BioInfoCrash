@@ -1,0 +1,221 @@
+---
+title: "Crash course de Bioinformática - Sesión 1"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## ¿Qué es R?
+
+R es un lenguaje de programación que se usa para análisis estadísticos de datos (tiene miles y miles de "packages" que nos permiten hacer lo que se nos antoje con nuestros datos)
+
+## Y ¿Por qué nos interesa a nosotrxs como biotecnólogxs?
+
+Fácil! Porque trabajamos con ADN. 
+¿Qué es el ADN? Datos!
+
+¿Y qué nos dicen esos datos?
+TCGGCGGTACATCAGTGGCAAATGCAGAACGTTTTCTGCGTGTTGCCGATATTCTGGAAAGCAATGCC
+AGGCAGGGGCAGGTGGCCACCGTCCTCTCTGCCCCCGCCAAAATCACCAACCACCTGGTGGCGATGATTG
+AAAAAACCATTAGCGGCCAGGATGCTTTACCCAATATCAGCGATGCCGAACGTATTTTTGCCGAACTTTT
+GACGGGACTCGCCGCCGCCCAGCCGGGGTTCCCGCTGGCGCAATTGAAAACTTTCGTCGATCAGGAATTT
+GCCCAAATAAAACATGTCCTGCATGGCATTAGTTTGTTGGGGCAGTGCCCGGATAGCATCAACGCTGCGC
+TGATTTGCCGTGGCGAGAAAATGTCGATCGCCATTATGGCCGGCGTATTAGAAGCGCGCGGTCACAACGT
+TACTGTTATCGATCCGGTCGAAAAACTGCTGGCAGTGGGGCATTACCTCGAATCTACCGTCGATATTGCT
+GAGTCCACCCGCCGTATTGCGGCAAGCCGCATTCCGGCTGATCACATGGTGCTGATGGCAGGTTTCACCG
+CCGGTAATGAAAAAGGCGAACTGGTGGTGCTTGGACGCAACGGTTCCGACTACTCTGCTGCGGTGCTGGC
+TGCCTGTTTACGCGCCGATTGTTGCGAGATTTGGACGGACGTTGACGGGGTCTATACCTGCGACCCGCGT
+CAGGTGCCCGATGCGAGGTTGTTGAAGTCGATGTCCTACCAGGAAGCGATGGAGCTTTCCTACTTCGGCG
+CTAAAGTTCTTCACCCCCGCACCATTACCCCCATCGCCCAGTTCCAGATCCCTTGCCTGATTAAAAATAC
+CGGAAATCCTCAAGCACCAGGTACGCTCATTGGTGCCAGCCGTGATGAAGACGAATTACCGGTCAAGGGC
+ATTTCCAATCTGAATAACATGGCAATGTTCAGCGTTTCTGGTCCGGGGATGAAAGGGATGGTCGGCATGG
+CGGCGCGCGTCTTTGCAGCGATGTCACGCGCCCGTATTTCCGTGGTGCTGATTACGCAATCATCTTCCGA
+ATACAGCATCAGTTTCTGCGTTCCACAAAGCGACTGTGTGCGAGCTGAACGGGCAATGCAGGAAGAGTTC
+TACCTGGAACTGAAAGAAGGCTTACTGGAGCCGCTGGCAGTGACGGAACGGCTGGCCATTATCTCGGTGA.
+
+Por eso necesitamos de programas como R que nos ayuden a descifrar cosas como:
+-Qué genes podemos encontrar en esa maraña de datos
+-Qué tanto se expresan unos genes en comparación de otros
+-Qué podemos descubrir acerca de qué está pasando dentro del organismo
+-??
+
+## Aprender a programar en R es como aprender un lenguaje nuevo
+
+En esta sesión vamos a practicar cómo programar funciones básicas que se usan mucho para analizar datos de secuenciación.
+
+## Cómo descargar RStudio
+
+1. Navega a **rstudio.com**
+2. Pon tu mouse sobre "Products" y haz click en RStudio
+3. Baja hasta que veas "There are two versions of RStudio" y haz click en RStudio Desktop
+4. Después en Download RStudio Desktop
+5. Después en RStudio Desktop Free y seguir las instrucciones
+
+## Qué hacer cuando no sabes qué hacer
+
+RStudio tiene documentación muy extensa. Cada vez que no sepas cómo usar un comando, basta con escribir un *?* seguido del comando:
+```{r eval=FALSE}
+?matrix
+```
+*Google es tu amigo!!!* 
+
+## Crea un notebook
+
+Los notebooks son herramientas que facilitan la programación y te ayudan a que tu código se vea más limpio.
+
+## Parte 1 - Fundamentos de R
+
+Ya que abriste tu notebook en R, en la parte de abajo verás la consola, que es donde tus comandos van a correr. 
+R tiene miles de "packages" de comandos que incrementan la funcionalidad. Por ejemplo:
+```{r eval=FALSE}
+library(MASS)
+#Muchos de los "packages" contienen ejemplos y tutoriales de uso que se llaman "vignettes", que puedes acceder escribiendo:
+browseVignettes()
+```
+En esta sesión no vamos a descargar _packages_.
+
+## Parte 2: Usando R como calculadora
+
+Igual que Matlab, R es un lenguaje matemático. 
+> Intenta programar las siguientes ecuaciones básicas:
+4+7
+4-7
+4*7
+4/7
+4^7
+4+7*3
+(4+7)*3
+sqrt(9)
+exp(3)
+sin(4)
+log(0)
+log(-1)  --> NaN (Not a Number)
+
+## Parte 3: Vectores y Matrices
+
+Los vectores y matrices nos van a ayudar a hacer tablas con nuestros datos, con lo que nos va a ser mucho más fácil trabajar.
+```{r eval=FALSE}
+#Para crear un vector usamos el comando *c* (concatenate)
+x=c(1,2,3,2,3)
+#Esto crea un vector con 5 elementos que guardamos en la variable "x"
+#¿Qué pasa si usamos diferentes símbolos para asignar números a variables?
+y=c(1,2,3,2,3)
+z<-c(1,2,3,2,3) #Puedes usar = o <- dependiendo de tus preferencias
+```
+Podemos hacer operaciones con los vectores. Trata de calcular:
+x-1
+x*2
+x^2
+exp(x)
+Podemos indexar los vectores usando corchetes ([]).
+Para seleccionar un elemento (o un grupo de elementos) de un vector, escribe
+```{r eval=FALSE}
+x[5]
+x[3:5]
+x[c(1,4)]
+#Ahora vamos a intentar esto; puedes explicar qué estamos haciendo?
+a = 2:4
+x[a]
+x[x>2]
+```
+Para hacer matrices usamos el comando *matrix*, que necesita 3 factores: un vector (el relleno de la matriz), el número de filas (=) y el número de columnas (|||). Por ejemplo,
+```{r eval=FALSE}
+z=matrix(1:12, 4,3)
+#También podemos indexar matrices, pero ahora usamos dos dimensiones en vez de una.
+#Para hacer una matriz 2x2 basada en las filas 3 a 4 y en las columnas 2 a 3:
+z[3:4,2:3]
+```
+El comando apply es muy útil para hacer operaciones matemáticas con matrices:
+```{r eval=FALSE}
+apply(z, 1, sum)
+#Usa ?apply para descubrir cómo se usa 
+```
+>**Usa _apply_ y _mean_ para calcular el valor promedio de cada columna en z.
+
+## Parte 4: Trabajando con Data Frames
+
+Los Data Frames son la forma más versátil para organizar datos. Se ven iguales que las matrices, pero pueden contener más de un tipo de dato (como números y letras en vez de nomás números).
+En este ejercicio vamos a usar un dataset de ejemplo que viene incluido en RStudio.
+```{r eval=FALSE}
+library(MASS) #Con esta línea instalamos el paquete "MASS", que contiene los datos "mammals"
+data(mammals) #Aquí cargamos el dataset "Mammals"
+class(mammals) #Con esta línea podemos ver que mammals está cargado como data.frame
+```
+
+El data set mammals tiene 62 filas y 2 columnas. Podemos ver esto usando el comando _dim()_
+```{r eval=FALSE}
+dim(mammals)
+```
+
+Con el comando _head()_ podemos ver las primeras 6 filas de nuestro data frame
+```{r eval=FALSE}
+head(mammals)
+```
+Podemos ver que los nombres de las filas y de las columnas no se cuentan en las dimensiones de los data frames. Los nombres se pueden extraer con 
+```{r eval=FALSE}
+rownames(mammals)
+colnames(mammals)
+```
+Para calcular el peso promedio de los mamíferos que tenemos en el dataframe "mammals", podemos escribir
+```{r eval=FALSE}
+mean(mammals[,1])
+#Ahora para el peso promedio de su cerebro,
+mean(mammals[,2])
+?mammals
+```
+Ahora, usa _median_, _var_, _sd_ y _sqrt_ para calcular la mediana, varianza y desviación estándar del peso del cuerpo y del cerebro. Ten en cuenta que el peso del cuerpo está en kg y el cerebro en g (de acuerdo a la documentación en ?mammals).
+
+Ahora, nuestro objetivo es saber qué mamífero tiene el cerebro más grande en comparación con su cuerpo:
+```{r eval=FALSE}
+ratio = (mammals[,2]/1000)/mammals[,1]
+```
+Esta información se puede añadir fácilmente al dataframe de mammals con
+```{r eval=FALSE}
+mammals2=cbind(mammals, ratio)
+```
+El nombre de la nueva columna se va a poner automáticamente como "ratio", pero podemos cambiar eso con 
+```{r eval=FALSE}
+colnames(mammals2)=c("Body", "Brain", "Body/Brain-ratio")
+```
+Es hora de ordenar nuestra tabla, y podemos hacerlo con la función _order()_
+```{r eval=FALSE}
+mammals.order=order(mammals2[,3], decreasing=TRUE)
+#Decreasing=TRUE nos va a ordenar los datos de más alto a más pequeño. Para hacerlo al revés, usa decreasing=FALSE.
+
+#Aún no terminamos. Ahora que tenemos el nuevo orden, indexamos mammals2 para que se organice como queremos
+mammals2.sorted=mammals2[mammals.order,] #la coma después de mammals.order es muy importante para decirle al data frame que debe de ordenar sus filas y no sus columnas de esa forma.
+```
+
+>¿Qué mamífero tiene la relación Body/Brain más alta? ¿Cuál tiene la más baja?
+
+#Parte 5: Usando funciones estadísticas 
+Ahora vamos a usar otro dataset:
+```{r eval=FALSE}
+data(cats)
+#Qué dimensiones tiene este data set?
+```
+Para usar la información de gatos hembras, escribimos:
+```{r eval=FALSE}
+female = cats[,1] == "F"
+```
+El operador lógico _==_ nos regresa una matriz lógica de "FALSE"s y "TRUE"s que luego podemos indexar para hacer un nuevo data frame sólo con los datos de los gatos hembra:
+```{r eval=FALSE}
+cats.female=cats[female,]
+```
+>Examina el data frame _cats.female_ y asegúrate de que sólo contenga datos de los gatos hembra. Luego, repite esta operación con los gatos macho. Guarda los resultados en la variable _"cats.male"_. Calcula la _mediana_, _media_, _varianza_ y _desviación estándar_ de ambos data sets. Son similares?
+
+Como discutimos antes, R es muy útil para analizar diferencias estadísticas.
+F-test
+```{r eval=FALSE}
+var.test(cats.female[,2], cats.male[,2])
+```
+>Interpreta los resultads. La diferencia es significativa?
+
+## Parte 6: Graficando y visualizando los datos
+
+
+
+
+
